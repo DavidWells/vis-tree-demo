@@ -8,8 +8,21 @@ import {
 import VisTreeReact from "@vis-tree/react";
 import useEventListener from "./use-listener";
 
+function Box(props) {
+  return (
+    <div style={{ width: '100%', fontSize: 8, height: 20 }}>
+      {props.children}
+    </div>
+  )
+}
+
 const originDataSource = {
   key: "O",
+  component: (
+    <Box>
+      Org chart
+    </Box>
+  ),
   children: [
     {
       key: "E",
@@ -81,6 +94,7 @@ const Demo = () => {
   };
 
   const renderNode = ({ node, expanded, parentNode }) => {
+    const thing = node.component || node.key
     return (
       <div
         style={{
@@ -90,7 +104,7 @@ const Demo = () => {
           border: "1px solid black",
         }}
       >
-        <div style={{ textAlign: "center" }}>{node.key}</div>
+        <div style={{ textAlign: "center" }}>{thing}</div>
         <div
           style={{
             display: "flex",
@@ -206,7 +220,7 @@ const Demo = () => {
           },
           defaultExpandAll: true,
           nodeWidth: 100,
-          nodeHeight: 50,
+          nodeHeight: 60,
         }}
       />
     </div>
