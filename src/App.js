@@ -6,6 +6,7 @@ import {
   AppstoreAddOutlined,
 } from "@ant-design/icons";
 import VisTreeReact from "@vis-tree/react";
+import useEventListener from "./use-listener";
 
 const originDataSource = {
   key: "O",
@@ -63,10 +64,13 @@ const originDataSource = {
   ],
 };
 
+
 let count = 1;
+let scale = 1;
 
 const Demo = () => {
   const treeRef = useRef();
+  const parentRef = useRef();
   const shouldExpandNodeKeyRef = useRef();
 
   const [dataSource, setDataSource] = useState(originDataSource);
@@ -155,11 +159,25 @@ const Demo = () => {
     }
   }, [dataSource]);
 
+  // Command + mouse wheel zooming
+  useEventListener('wheel', (event) => {
+    console.log(event)
+    if (event.metaKey) {
+      event.preventDefault();
+      scale += event.deltaY * -0.01;
+      // Restrict scale
+      scale = Math.min(Math.max(.125, scale), 2);
+      setScaleRatio(scale);
+    }
+  }, parentRef.current, { capture: true });
+
   return (
     <div
       style={{
         position: "relative",
       }}
+      
+      ref={parentRef}
     >
       <input
         style={{
