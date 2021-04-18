@@ -123,8 +123,8 @@ const Demo = () => {
         {node.children && node.children.length > 0 && (
           <div
             style={{
-              width: 14,
-              height: 14,
+              width: 15,
+              height: 15,
               position: "absolute",
               top: "100%",
               left: "50%",
