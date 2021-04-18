@@ -176,7 +176,7 @@ const Demo = () => {
         onChange={handleScaleRatioChange}
       />
       <VisTreeReact
-        style={{ width: "100%", height: "400px" }}
+        style={{ width: "100%", height: "100vh" }}
         ref={treeRef}
         dataSource={dataSource}
         scaleRatio={scaleRatio}
