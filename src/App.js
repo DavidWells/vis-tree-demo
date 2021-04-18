@@ -161,7 +161,7 @@ const Demo = () => {
 
   // Command + mouse wheel zooming
   useEventListener('wheel', (event) => {
-    console.log(event)
+    // If command key held activate zooming
     if (event.metaKey) {
       event.preventDefault();
       scale += event.deltaY * -0.01;
